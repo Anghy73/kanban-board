@@ -1,3 +1,4 @@
+import { TasksProvider } from '../context/tasks'
 import KanbanBoard from './components/KanbanBoard'
 
 function App () {
@@ -5,7 +6,9 @@ function App () {
     <div className='flex flex-col justify-center items-center w-screen h-screen'>
       <header>Header Component</header>
       <main className=' flex flex-1 w-full'>
-        <KanbanBoard />
+        <TasksProvider>
+          <KanbanBoard />
+        </TasksProvider>
       </main>
     </div>
   )

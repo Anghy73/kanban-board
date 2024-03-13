@@ -4,42 +4,21 @@ import { useColumns } from '../hooks/useColumns'
 import ColumnContainer from './ColumnContainer'
 import { createPortal } from 'react-dom'
 import { useState } from 'react'
+import TaskItem from './TaskItem'
+import { useTasks } from '../hooks/useTasks'
+import { useBoard } from '../hooks/useBoard'
 
 function KanbanBoard () {
   const { columns, columnsId } = useColumns()
+  const { tasks } = useTasks()
   const [activeColumn, setActiveColumn] = useState(null)
-  // console.log(columns)
-  // console.log(columnsId)
-
-  const handleDragStart = (evt) => {
-    console.log('drag Start')
-    const { active } = evt
-
-    if (active.data.current.type === 'Column') {
-      setActiveColumn(active.data.current.column)
-    }
-  }
-
-  const handleDragOver = () => {
-    console.log('drag Over')
-  }
-
-  const handleDragEnd = (evt) => {
-    console.log('drag End')
-
-    // const { active, over } = evt
-    setActiveColumn(null)
-
-    // console.log(active)
-    // console.log(over)
-  }
-
-  console.log(activeColumn)
+  const [activeTask, setActiveTask] = useState(null)
+  const { handleDragEnd, handleDragStart, handleDragOver } = useBoard({ setActiveColumn, setActiveTask })
 
   return (
     <div className='flex flex-col flex-1 bg-slate-700'>
       <h1>Kanban Board Component</h1>
-      <div className='bg-blue-400 flex gap-4 min-h-72'>
+      <div className='flex justify-center items-center bg-blue-400 gap-4 h-full'>
         <DndContext
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
@@ -51,7 +30,7 @@ function KanbanBoard () {
           >
             {
             columns.map(col => (
-              <ColumnContainer key={col.id} column={col} />
+              <ColumnContainer key={col.id} column={col} tasks={tasks.filter(task => task.columnId === col.id)} />
             ))
           }
           </SortableContext>
@@ -60,7 +39,12 @@ function KanbanBoard () {
               <DragOverlay>
                 {
                   activeColumn && (
-                    <ColumnContainer column={activeColumn} />
+                    <ColumnContainer column={activeColumn} tasks={tasks.filter(task => task.columnId === activeColumn.id)} />
+                  )
+                }
+                {
+                  activeTask && (
+                    <TaskItem task={activeTask} />
                   )
                 }
               </DragOverlay>,
@@ -68,8 +52,11 @@ function KanbanBoard () {
             )
           }
         </DndContext>
+        <div>
+          <span>+</span>
+          Add Column
+        </div>
       </div>
-      <button>Add Column</button>
     </div>
   )
 }

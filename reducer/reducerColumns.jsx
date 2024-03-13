@@ -17,11 +17,12 @@ export const reducerColumns = (state, action) => {
   const { type: actionType, payload: actionPayload } = action
 
   switch (actionType) {
-    case 'ADD_COLUMN':
-      console.log('dasd')
-      break
+    case 'ADD_COLUMN': {
+      return state
+    }
 
-    default:
-      break
+    case 'UPDATE_ORDEN_COLUMNS': {
+      return actionPayload
+    }
   }
 }
