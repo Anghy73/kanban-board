@@ -24,13 +24,13 @@ function TaskItem ({ task }) {
 
   if (isDragging) {
     return (
-      <div ref={setNodeRef} style={style} className='bg-orange-400 w-full min-h-10' />
+      <div ref={setNodeRef} style={style} className='border-2 border-[#00beef] w-full min-h-24 rounded-xl' />
     )
   }
 
   return (
     <>
-      <div style={style} ref={setNodeRef} {...attributes} {...listeners} className='bg-blue-600 w-full min-h-10' key={task.id}>{task.content}</div>
+      <div style={style} ref={setNodeRef} {...attributes} {...listeners} className='bg-stone-950 w-full min-h-24 rounded-lg p-3' key={task.id}>{task.content}</div>
     </>
   )
 }

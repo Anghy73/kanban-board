@@ -7,6 +7,7 @@ import { useState } from 'react'
 import TaskItem from './TaskItem'
 import { useTasks } from '../hooks/useTasks'
 import { useBoard } from '../hooks/useBoard'
+import { CgAdd } from 'react-icons/cg'
 
 function KanbanBoard () {
   const { columns, columnsId } = useColumns()
@@ -16,9 +17,9 @@ function KanbanBoard () {
   const { handleDragEnd, handleDragStart, handleDragOver } = useBoard({ setActiveColumn, setActiveTask })
 
   return (
-    <div className='flex flex-col flex-1 bg-slate-700'>
+    <div className='flex flex-col flex-1'>
       <h1>Kanban Board Component</h1>
-      <div className='flex justify-center items-center bg-blue-400 gap-4 h-full'>
+      <div className='flex justify-center items-center gap-4 h-full px-10'>
         <DndContext
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
@@ -52,10 +53,10 @@ function KanbanBoard () {
             )
           }
         </DndContext>
-        <div>
-          <span>+</span>
+        <button className='flex justify-center items-center bg-slate-800 gap-2 text-base py-3 rounded-md hover:bg-slate-700 w-full min-w-[350px] max-w-[350px]'>
+          <CgAdd />
           Add Column
-        </div>
+        </button>
       </div>
     </div>
   )

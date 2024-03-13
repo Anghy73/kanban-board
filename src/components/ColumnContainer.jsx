@@ -2,6 +2,7 @@ import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-
 import { CSS } from '@dnd-kit/utilities'
 import TaskItem from './TaskItem'
 import { useTasks } from '../hooks/useTasks'
+import { CgAdd } from 'react-icons/cg'
 
 function ColumnContainer ({ column, tasks }) {
   const { tasksId } = useTasks()
@@ -28,17 +29,20 @@ function ColumnContainer ({ column, tasks }) {
 
   if (isDragging) {
     return (
-      <div ref={setNodeRef} style={style} className='bg-emerald-500 w-52 h-56'>hola mundo</div>
+      <div ref={setNodeRef} style={style} className='bg-zinc-900 border-2 border-[#00beef] min-w-[350px] max-w-[350px] h-[450px] rounded-lg' />
     )
   }
 
   return (
-    <div ref={setNodeRef} style={style} className='bg-red-400 w-52 h-56 flex flex-col'>
-      <div {...attributes} {...listeners}>
-        <h1>{column.title}</h1>
-        <span>Column Container Component</span>
+    <div ref={setNodeRef} style={style} className='bg-slate-800 w-full min-w-[350px] max-w-[350px] h-[450px] flex flex-col justify-between rounded-md'>
+      <div className='flex justify-between bg-stone-950 px-2 py-3 m-1 rounded-sm' {...attributes} {...listeners}>
+        <div className='flex gap-2'>
+          <span>0</span>
+          <h1>{column.title}</h1>
+        </div>
+        <i>X</i>
       </div>
-      <div className='bg-emerald-400 flex flex-col gap-2 p-3 flex-1'>
+      <div id='TaskScroll' className='flex flex-col gap-3 py-3 flex-1 min-h-[300px] overflow-scroll overflow-x-hidden px-2'>
         <SortableContext
           items={tasksId}
           strategy={verticalListSortingStrategy}
@@ -49,8 +53,11 @@ function ColumnContainer ({ column, tasks }) {
             ))
           }
         </SortableContext>
-        <div className='bg-red-600'>click</div>
       </div>
+      <button className='flex justify-center items-center gap-2 text-base py-3 rounded-md hover:bg-stone-950 m-1'>
+        <CgAdd />
+        Add Task
+      </button>
     </div>
   )
 }
