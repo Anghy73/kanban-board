@@ -1,8 +1,13 @@
+import KanbanBoard from './components/KanbanBoard'
+
 function App () {
   return (
-    <>
-      <h1 className='text-3xl text-red-500'>Hello World</h1>
-    </>
+    <div className='flex flex-col justify-center items-center w-screen h-screen'>
+      <header>Header Component</header>
+      <main className=' flex flex-1 w-full'>
+        <KanbanBoard />
+      </main>
+    </div>
   )
 }
 
