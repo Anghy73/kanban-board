@@ -6,8 +6,23 @@ export const ColumnsContext = createContext()
 export function ColumnsProvider ({ children }) {
   const [state, dispatch] = useReducer(reducerColumns, reducerColumnsInitialState)
 
+  const addColumn = product => dispatch({
+    type: 'ADD_COLUMN',
+    payload: product
+  })
+
+  const delColumn = product => dispatch({
+    type: 'DELETE_COLUMN',
+    payload: product
+  })
+
   const updateOrdenColumns = product => dispatch({
     type: 'UPDATE_ORDEN_COLUMNS',
+    payload: product
+  })
+
+  const updateTitleColumn = product => dispatch({
+    type: 'UPDATE_TITLE_COLUMN',
     payload: product
   })
 
@@ -17,7 +32,10 @@ export function ColumnsProvider ({ children }) {
     <ColumnsContext.Provider value={{
       columns: state,
       columnsId,
-      updateOrdenColumns
+      addColumn,
+      delColumn,
+      updateOrdenColumns,
+      updateTitleColumn
     }}
     >
       {children}

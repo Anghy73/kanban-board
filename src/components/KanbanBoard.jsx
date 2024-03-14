@@ -1,4 +1,4 @@
-import { DndContext, DragOverlay } from '@dnd-kit/core'
+import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
 import { useColumns } from '../hooks/useColumns'
 import ColumnContainer from './ColumnContainer'
@@ -10,11 +10,23 @@ import { useBoard } from '../hooks/useBoard'
 import { CgAdd } from 'react-icons/cg'
 
 function KanbanBoard () {
-  const { columns, columnsId } = useColumns()
+  const { columns, columnsId, addColumn } = useColumns()
   const { tasks } = useTasks()
   const [activeColumn, setActiveColumn] = useState(null)
   const [activeTask, setActiveTask] = useState(null)
   const { handleDragEnd, handleDragStart, handleDragOver } = useBoard({ setActiveColumn, setActiveTask })
+
+  const handleAddColumn = () => {
+    addColumn()
+  }
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10
+      }
+    })
+  )
 
   return (
     <div className='flex flex-col flex-1'>
@@ -24,6 +36,7 @@ function KanbanBoard () {
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
           onDragEnd={handleDragEnd}
+          sensors={sensors}
         >
           <SortableContext
             items={columnsId}
@@ -53,7 +66,7 @@ function KanbanBoard () {
             )
           }
         </DndContext>
-        <button className='flex justify-center items-center bg-slate-800 gap-2 text-base py-3 rounded-md hover:bg-slate-700 w-full min-w-[350px] max-w-[350px]'>
+        <button onClick={handleAddColumn} className='flex justify-center items-center bg-slate-800 gap-2 text-lg py-3 rounded-md hover:bg-slate-700 w-full min-w-[350px] max-w-[350px]'>
           <CgAdd />
           Add Column
         </button>
