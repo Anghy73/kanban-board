@@ -59,7 +59,7 @@ function ColumnContainer ({ column, tasks }) {
     <div ref={setNodeRef} style={style} className='bg-slate-800 w-full min-w-[350px] max-w-[350px] h-[450px] flex flex-col justify-between rounded-md relative'>
       <div className='flex justify-between bg-stone-950 px-2 py-3 m-1 rounded-sm max-h-12' {...attributes} {...listeners} onClick={handleEditMode}>
         <div className='flex gap-2'>
-          <span className='w-6 h-6 p-3 bg-slate-800 rounded-full flex justify-center items-center font-bold'>0</span>
+          <span className='w-6 h-6 p-3 bg-slate-800 rounded-full flex justify-center items-center font-bold overflow-hidden'>{tasks.length}</span>
           {!editMode && <h1 className='font-bold'>{column.title}</h1>}
           {editMode && (
             <input type='text' value={column.title} onBlur={handleEditMode} autoFocus className='bg-stone-950 text-white outline-none border focus:border-[#00beef] px-2 py-1 rounded font-bold' onChange={handleChangeTitle} />
