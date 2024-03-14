@@ -7,9 +7,8 @@ import { useColumns } from '../hooks/useColumns'
 import { useState } from 'react'
 
 function ColumnContainer ({ column, tasks }) {
-  const { tasksId } = useTasks()
+  const { tasksId, addTask, delTask } = useTasks()
   const { delColumn, updateTitleColumn } = useColumns()
-
   const [editMode, setEditMode] = useState(false)
 
   const {
@@ -41,6 +40,7 @@ function ColumnContainer ({ column, tasks }) {
 
   const handleDelColumn = () => {
     delColumn(column)
+    delTask(tasks)
   }
 
   const handleEditMode = () => {
@@ -49,6 +49,10 @@ function ColumnContainer ({ column, tasks }) {
 
   const handleChangeTitle = (evt) => {
     updateTitleColumn({ column, newTitle: evt.target.value })
+  }
+
+  const handleAddTask = () => {
+    addTask({ column })
   }
 
   return (
@@ -77,7 +81,7 @@ function ColumnContainer ({ column, tasks }) {
           }
         </SortableContext>
       </div>
-      <button className='flex justify-center items-center gap-2 text-base py-3 rounded-md hover:bg-stone-950 m-1'>
+      <button className='flex justify-center items-center gap-2 text-base py-3 rounded-md hover:bg-stone-950 m-1' onClick={handleAddTask}>
         <CgAdd />
         Add Task
       </button>

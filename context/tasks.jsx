@@ -6,13 +6,23 @@ export const TasksContext = createContext()
 export function TasksProvider ({ children }) {
   const [state, dispatch] = useReducer(reducerTasks, reducerTasksInitialState)
 
-  // const addTask = product => dispatch({
-  //   type: 'ADD_TASK',
-  //   payload: product
-  // })
+  const addTask = product => dispatch({
+    type: 'ADD_TASK',
+    payload: product
+  })
 
   const updateOrdenTasks = product => dispatch({
     type: 'UPDATE_ORDEN_TASKS',
+    payload: product
+  })
+
+  const updateTextTask = product => dispatch({
+    type: 'UPDATE_TEXT_TASK',
+    payload: product
+  })
+
+  const delTask = product => dispatch({
+    type: 'DELETE_TASK',
     payload: product
   })
 
@@ -22,8 +32,10 @@ export function TasksProvider ({ children }) {
     <TasksContext.Provider value={{
       tasks: state,
       tasksId,
-      updateOrdenTasks
-      // addTask
+      updateOrdenTasks,
+      updateTextTask,
+      delTask,
+      addTask
     }}
     >
       {children}
