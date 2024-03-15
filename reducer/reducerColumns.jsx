@@ -1,4 +1,4 @@
-export const reducerColumnsInitialState = [
+export const reducerColumnsInitialState = JSON.parse(window.localStorage.getItem('columns')) || [
   {
     id: 'todo',
     title: 'Todo'
@@ -29,15 +29,18 @@ export const reducerColumns = (state, action) => {
           title: `Column ${state.length + 1}`
         }
       ]
+      window.localStorage.setItem('columns', JSON.stringify(newState))
       return newState
     }
 
     case 'DELETE_COLUMN': {
       const newState = state.filter(item => item.id !== actionPayload.id)
+      window.localStorage.setItem('columns', JSON.stringify(newState))
       return newState
     }
 
     case 'UPDATE_ORDEN_COLUMNS': {
+      window.localStorage.setItem('columns', JSON.stringify(actionPayload))
       return actionPayload
     }
 
@@ -52,6 +55,7 @@ export const reducerColumns = (state, action) => {
         }
         return item
       })
+      window.localStorage.setItem('columns', JSON.stringify(newState))
       return newState
     }
   }

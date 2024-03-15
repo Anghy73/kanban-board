@@ -1,4 +1,4 @@
-export const reducerTasksInitialState = [
+export const reducerTasksInitialState = JSON.parse(window.localStorage.getItem('tasksKanban')) || [
   {
     id: 1,
     content: 'Task 1',
@@ -34,10 +34,12 @@ export const reducerTasks = (state, action) => {
           columnId: column.id
         }
       ]
+      window.localStorage.setItem('tasksKanban', JSON.stringify(newState))
       return newState
     }
 
     case 'UPDATE_ORDEN_TASKS': {
+      window.localStorage.setItem('tasksKanban', JSON.stringify(actionPayload))
       return actionPayload
     }
 
@@ -48,6 +50,7 @@ export const reducerTasks = (state, action) => {
       } else {
         newState = state.filter(item => item.id !== actionPayload.id)
       }
+      window.localStorage.setItem('tasksKanban', JSON.stringify(newState))
       return newState
     }
 
@@ -62,6 +65,8 @@ export const reducerTasks = (state, action) => {
         }
         return item
       })
+      window.localStorage.setItem('tasksKanban', JSON.stringify(newState))
+
       return newState
     }
   }
