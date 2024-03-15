@@ -45,3 +45,14 @@ body {
 .trash {
   display: none;
 }
+
+.taskContent::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.taskContent::-webkit-scrollbar-thumb {
+  background-color: #00ccff;
+  border-radius: 4px;
+}

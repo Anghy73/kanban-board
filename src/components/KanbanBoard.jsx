@@ -30,7 +30,7 @@ function KanbanBoard () {
 
   return (
     <div className='flex flex-col flex-1'>
-      <h1>Kanban Board Component</h1>
+      {/* <h1>Kanban Board Component</h1> */}
       <div className='flex justify-center items-center gap-4 h-full px-10'>
         <DndContext
           onDragStart={handleDragStart}

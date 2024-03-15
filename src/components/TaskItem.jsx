@@ -53,7 +53,7 @@ function TaskItem ({ task }) {
     return (
       <>
         <div style={style} ref={setNodeRef} {...attributes} {...listeners} className='bg-stone-950 w-full min-h-24 rounded-lg p-3 relative hover:ring-2 hover:border-[#00beef] item'>
-          <textarea className='w-full h-full bg-stone-950 border-none focus:outline-none resize-none' onBlur={handleEditMode} autoFocus value={task.content} onChange={handleChangeTextarea} />
+          <textarea className='w-full h-full bg-stone-950 border-none focus:outline-none resize-none taskContent' onBlur={handleEditMode} autoFocus value={task.content} onChange={handleChangeTextarea} />
         </div>
       </>
     )
@@ -62,10 +62,7 @@ function TaskItem ({ task }) {
   return (
     <>
       <div style={style} ref={setNodeRef} {...attributes} {...listeners} className='bg-stone-950 w-full min-h-24 rounded-lg p-3 relative hover:ring-2 hover:border-[#00beef] item' onClick={handleEditMode}>
-        {!editMode && <p className='w-full h-full'>{task.content}</p>}
-        {editMode && (
-          <textarea className='w-full h-full bg-stone-950 border-none focus:outline-none resize-none' onBlur={handleEditMode} autoFocus value={task.content} />
-        )}
+        {!editMode && <p className='w-full h-full overflow-x-hidden overflow-y-auto taskContent'>{task.content}</p>}
         {!activeText && <CgTrash className='w-9 h-9 p-1 rounded-md hover:bg-slate-800 absolute right-5 top-8 text-slate-400 hover:text-slate-300 trash' onClick={handleDelTask} />}
       </div>
     </>
