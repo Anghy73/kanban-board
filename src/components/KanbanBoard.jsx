@@ -66,7 +66,7 @@ function KanbanBoard () {
             )
           }
         </DndContext>
-        <button onClick={handleAddColumn} className='flex justify-center items-center bg-slate-800 gap-2 text-lg py-3 rounded-md hover:bg-slate-700 w-full min-w-[350px] max-w-[350px]'>
+        <button onClick={handleAddColumn} className='flex justify-center items-center bg-slate-400 dark:bg-slate-800 gap-2 text-lg py-3 rounded-md hover:bg-slate-300 dark:hover:bg-slate-700 w-full min-w-[350px] max-w-[350px]'>
           <CgAdd />
           Add Column
         </button>

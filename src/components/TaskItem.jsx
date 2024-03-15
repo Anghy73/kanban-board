@@ -52,8 +52,8 @@ function TaskItem ({ task }) {
   if (editMode) {
     return (
       <>
-        <div style={style} ref={setNodeRef} {...attributes} {...listeners} className='bg-stone-950 w-full min-h-24 rounded-lg p-3 relative hover:ring-2 hover:border-[#00beef] item'>
-          <textarea className='w-full h-full bg-stone-950 border-none focus:outline-none resize-none taskContent' onBlur={handleEditMode} autoFocus value={task.content} onChange={handleChangeTextarea} />
+        <div style={style} ref={setNodeRef} {...attributes} {...listeners} className='bg-stone-200 dark:bg-stone-950 w-full min-h-24 rounded-lg p-3 relative hover:ring-2 hover:border-[#00beef] item'>
+          <textarea className='w-full h-full bg-stone-200 dark:bg-stone-950 border-none focus:outline-none resize-none taskContent' onBlur={handleEditMode} autoFocus value={task.content} onChange={handleChangeTextarea} />
         </div>
       </>
     )
@@ -61,9 +61,9 @@ function TaskItem ({ task }) {
 
   return (
     <>
-      <div style={style} ref={setNodeRef} {...attributes} {...listeners} className='bg-stone-950 w-full min-h-24 rounded-lg p-3 relative hover:ring-2 hover:border-[#00beef] item' onClick={handleEditMode}>
+      <div style={style} ref={setNodeRef} {...attributes} {...listeners} className='bg-stone-200 dark:bg-stone-950 w-full min-h-24 max-h-24 rounded-lg p-3 relative text-black dark:text-white border-2 border-transparent hover:border-[#00beef] item overflow-hidden' onClick={handleEditMode}>
         {!editMode && <p className='w-full h-full overflow-x-hidden overflow-y-auto taskContent'>{task.content}</p>}
-        {!activeText && <CgTrash className='w-9 h-9 p-1 rounded-md hover:bg-slate-800 absolute right-5 top-8 text-slate-400 hover:text-slate-300 trash' onClick={handleDelTask} />}
+        {!activeText && <CgTrash className='w-9 h-9 p-1 rounded-md bg-slate-400 dark:bg-slate-800 dark:hover:bg-slate-700 absolute right-5 top-8 text-slate-600 dark:text-slate-300 hover:text-slate-300 trash' onClick={handleDelTask} />}
       </div>
     </>
   )
